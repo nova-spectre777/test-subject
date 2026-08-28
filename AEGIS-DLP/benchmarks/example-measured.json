@@ -1,0 +1,11 @@
+[
+  {
+    "classification": "measured",
+    "algorithm": "example-only",
+    "bits": 20,
+    "group_operations": 0,
+    "seconds": 0.0,
+    "verified": false,
+    "note": "Schema/example record only; not a claimed solved instance."
+  }
+]
