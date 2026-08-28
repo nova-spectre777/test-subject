@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AEGIS-DLP Result Certificate",
+  "type": "object",
+  "required": ["instance", "classification", "algorithm", "verification", "environment"],
+  "properties": {
+    "instance": {"type": "object"},
+    "structure_measurements": {"type": "object"},
+    "algorithm": {"type": "string"},
+    "selection_rationale": {"type": "string"},
+    "group_operations": {"type": "integer", "minimum": 0},
+    "wall_seconds": {"type": "number", "minimum": 0},
+    "classification": {"enum": ["measured", "extrapolated", "theoretical"]},
+    "verification": {"type": "object", "required": ["verified"], "properties": {"verified": {"type": "boolean"}}},
+    "environment": {"type": "object"},
+    "certificate_digest": {"type": "string"}
+  },
+  "allOf": [
+    {"if": {"properties": {"classification": {"const": "measured"}}}, "then": {"required": ["group_operations", "wall_seconds"]}}
+  ]
+}
