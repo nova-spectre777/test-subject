@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AEGIS-DLP benchmark record",
+  "type": "object",
+  "required": ["instance_id", "bits", "benchmark_class", "algorithm", "verified", "operations"],
+  "properties": {
+    "instance_id": {"type": "string"},
+    "bits": {"type": "integer", "minimum": 1},
+    "benchmark_class": {"enum": ["exhaustive-validation", "measured-benchmark", "analytical-extrapolation", "theoretical-target"]},
+    "algorithm": {"type": "string"},
+    "verified": {"type": "boolean"},
+    "operations": {"type": "integer", "minimum": 0},
+    "structure": {"type": "object"},
+    "certificate_sha256": {"type": "string"}
+  }
+}
