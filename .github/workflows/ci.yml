@@ -1,0 +1,38 @@
+name: AEGIS-DLP CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: core/rust
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test
+
+  cpp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build C++ benchmark
+        run: |
+          cmake -S engines/cpp -B build/cpp
+          cmake --build build/cpp --config Release
+          ./build/cpp/aegis_bench
+
+  go:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: runner/go
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - run: go run . 32
